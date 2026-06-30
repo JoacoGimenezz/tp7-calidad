@@ -1,5 +1,6 @@
 package steps;
 
+import calculadora.CalculadoraLogica;
 import io.cucumber.java.es.*;
 import static org.junit.jupiter.api.Assertions.*;
 

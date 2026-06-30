@@ -1,7 +1,5 @@
-/**
- * Clase que contiene toda la lógica de la calculadora.
- * Separada de la interfaz gráfica (buena práctica de diseño).
- */
+package calculadora;
+
 public class CalculadoraLogica {
 
     private double primerOperando = 0;
