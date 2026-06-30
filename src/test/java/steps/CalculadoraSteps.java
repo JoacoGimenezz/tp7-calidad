@@ -1,60 +1,56 @@
 package steps;
 
 import calculadora.CalculadoraLogica;
-import io.cucumber.java.es.*;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.When;
+import io.cucumber.java.en.Then;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CalculadoraSteps {
 
     private CalculadoraLogica calc;
-    private int a, b;
-    private String operador;
 
-    @Dado("que ingreso el numero {int}")
-    public void queIngresoElNumero(int numero) {
-        if (calc == null) {
-            calc = new CalculadoraLogica();
-        }
-        if (operador == null) {
-            a = numero;
-            calc.ingresarDigito(String.valueOf(numero));
-        } else {
-            b = numero;
-            calc.ingresarDigito(String.valueOf(numero));
-        }
+    @Given("que tengo los numeros {int} y {int}")
+    public void queTengoLosNumeros(int a, int b) {
+        calc = new CalculadoraLogica();
+        calc.ingresarDigito(String.valueOf(a));
+        this.a = a;
+        this.b = b;
     }
 
-    @Cuando("selecciono la operacion suma")
+    private int a, b;
+
+    @When("selecciono la operacion suma")
     public void seleccionoSuma() {
         calc.establecerOperador("+");
-        operador = "+";
+        calc.ingresarDigito(String.valueOf(b));
     }
 
-    @Cuando("selecciono la operacion resta")
+    @When("selecciono la operacion resta")
     public void seleccionoResta() {
         calc.establecerOperador("-");
-        operador = "-";
+        calc.ingresarDigito(String.valueOf(b));
     }
 
-    @Cuando("selecciono la operacion multiplicacion")
+    @When("selecciono la operacion multiplicacion")
     public void seleccionoMultiplicacion() {
         calc.establecerOperador("*");
-        operador = "*";
+        calc.ingresarDigito(String.valueOf(b));
     }
 
-    @Cuando("selecciono la operacion division")
+    @When("selecciono la operacion division")
     public void seleccionoDivision() {
         calc.establecerOperador("/");
-        operador = "/";
+        calc.ingresarDigito(String.valueOf(b));
     }
 
-    @Entonces("el resultado debe ser {int}")
+    @Then("el resultado debe ser {int}")
     public void elResultadoDebeSer(int esperado) {
         calc.calcular();
         assertEquals(String.valueOf(esperado), calc.getEntradaActual());
     }
 
-    @Entonces("debe mostrar un mensaje de error")
+    @Then("debe mostrar un mensaje de error")
     public void debeMostrarError() {
         calc.calcular();
         assertTrue(calc.getEntradaActual().contains("No se puede dividir"));
