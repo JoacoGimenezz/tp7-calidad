@@ -21,10 +21,15 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Compilar proyecto
-        run: |
-          mkdir -p bin
-          javac -d bin $(find src -name "*.java")
+      - name: Cache Maven packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      - name: Compilar y testear con Maven
+        run: mvn clean verify
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v4
