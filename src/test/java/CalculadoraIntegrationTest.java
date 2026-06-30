@@ -74,8 +74,8 @@ class CalculadoraIntegrationTest {
         calc.calcular();
         assertTrue(calc.getEntradaActual().contains("No se puede dividir"));
 
-        // Recuperarse con CE
-        calc.limpiarEntrada();
+        // Recuperarse con C (limpia todo, incluyendo operador pendiente)
+        calc.limpiarTodo();
         assertEquals("0", calc.getEntradaActual());
 
         // Continuar operando normalmente
