@@ -236,9 +236,9 @@ public class Calculadora extends JFrame {
 
     private static Color aclarar(Color c, int cantidad) {
         return new Color(
-            Math.clamp(c.getRed()   + cantidad, 0, 255),
-            Math.clamp(c.getGreen() + cantidad, 0, 255),
-            Math.clamp(c.getBlue()  + cantidad, 0, 255)
+            Math.min(255, Math.max(0, c.getRed()   + cantidad)),
+            Math.min(255, Math.max(0, c.getGreen() + cantidad)),
+            Math.min(255, Math.max(0, c.getBlue()  + cantidad))
         );
     }
 
